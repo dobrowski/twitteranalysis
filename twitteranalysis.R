@@ -12,6 +12,7 @@ pacman::p_load(
         ,igraph
 #        ,hrbrthemes
         ,visNetwork
+,ggthemes
         )
 
 
@@ -67,7 +68,7 @@ eds <- get_timeline(c(
   "MCOE_ELA",
   "WilliamFranzell",
   "denisebgreen"
-  ), n = 1000)
+  ), n = 2000)
 
 
 oldest.eds <- eds %>% 
@@ -132,7 +133,7 @@ plot(mat2)
 MCOE_now <- search_tweets("MCOE", n=1500)
 
 
-MCOE_now <- search_tweets("colefax", n=1500)
+#MCOE_now <- search_tweets("colefax", n=1500)
 
 # Retweets
 rt_g <-MCOE_now %>%
@@ -275,8 +276,6 @@ visIgraph(rt_g) %>%
 }
 
 
-
-
 mentions <-  function(data){
   
   step1 <- # if_else(type == "retweet", 
@@ -287,9 +286,9 @@ mentions <-  function(data){
     # select(screen_name, retweet_screen_name) %>%
     # na.omit() %>%
     # group_by(screen_name, retweet_screen_name)#,
-  
-  # Mentions
-  data %>%
+    
+    # Mentions
+    data %>%
     select(screen_name, mentions_screen_name) %>%
     unnest(mentions_screen_name) %>%
     filter(!is.na(mentions_screen_name)) %>%
@@ -315,3 +314,21 @@ mentions <-  function(data){
     visInteraction(hover = TRUE)
   
 }
+
+
+retweet(MCOE_now)
+
+mentions(MCOE_now)
+
+
+
+  
+
+
+
+
+
+
+
+
+
